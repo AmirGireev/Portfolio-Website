@@ -13,6 +13,10 @@ export default defineConfig({
   adapter: isNetlify ? netlify() : vercel(),
   site: process.env.SITE_URL || 'https://example.com',
 
+devToolbar: {
+    enabled: false,
+  },
+  
   env: {
     schema: {
       SITE_URL: envField.string({ context: 'server', access: 'public', optional: true }),

@@ -2,7 +2,6 @@ import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
-// Blog collection with Content Layer API
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
   schema: ({ image }) =>
@@ -33,7 +32,6 @@ const pages = defineCollection({
   }),
 });
 
-// Authors collection
 const authors = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/authors' }),
   schema: ({ image }) =>
@@ -51,7 +49,6 @@ const authors = defineCollection({
     }),
 });
 
-// FAQs collection (for JSON-LD FAQ schema)
 const faqs = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/faqs' }),
   schema: z.object({
@@ -63,7 +60,6 @@ const faqs = defineCollection({
   }),
 });
 
-// Projects collection — one MDX file per project
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/projects' }),
   schema: ({ image }) =>
@@ -85,7 +81,6 @@ const projects = defineCollection({
     }),
 });
 
-// Stack collection — one MDX file per tool, editable like blog posts
 const stack = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/stack' }),
   schema: z.object({
@@ -93,8 +88,8 @@ const stack = defineCollection({
     description: z.string(),
     version: z.string(),
     url: z.string().url(),
-    icon: z.string(), // icon name, e.g. 'brand-astro'
-    colorOklch: z.string(), // OKLCH params, e.g. '62.5% 0.22 38'
+    icon: z.string(),
+    colorOklch: z.string(), 
     order: z.number().default(0),
   }),
 });
