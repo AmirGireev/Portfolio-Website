@@ -5,10 +5,6 @@ import BaseLayout from './BaseLayout.astro';
 import Header from '@/components/layout/Header.astro';
 import Footer from '@/components/layout/Footer.astro';
 import Breadcrumbs from '@/components/seo/Breadcrumbs.astro';
-import ArticleHero from '@/components/blog/ArticleHero.astro';
-import ShareButtons from '@/components/blog/ShareButtons.astro';
-import RelatedPosts from '@/components/blog/RelatedPosts.astro';
-import CTA from '@/components/ui/marketing/CTA/CTA.astro';
 import Icon from '@/components/ui/primitives/Icon/Icon.astro';
 import { resolveSocialLinks } from '@/lib/utils';
 
@@ -78,17 +74,7 @@ const fullUrl = new URL(Astro.url.pathname, Astro.site).toString();
 
   <div class="min-h-screen pt-16">
   <!-- Article Hero -->
-  <ArticleHero
-    title={title}
-    description={description}
-    publishedAt={publishedAt}
-    updatedAt={updatedAt}
-    author={author}
-    tags={tags}
-    image={image}
-    imageAlt={imageAlt}
-    svgSlug={svgSlug}
-  />
+
 
   <article class="pt-8 pb-[var(--space-section-md)]">
     <div class="mx-auto max-w-4xl px-6">
@@ -124,8 +110,6 @@ const fullUrl = new URL(Astro.url.pathname, Astro.site).toString();
             Back to Blog
           </a>
 
-          <!-- Share buttons -->
-          <ShareButtons title={title} url={fullUrl} />
         </div>
       </footer>
     </div>
@@ -134,12 +118,10 @@ const fullUrl = new URL(Astro.url.pathname, Astro.site).toString();
   <!-- Related Posts -->
   {tags.length > 0 && (
     <div class="mx-auto max-w-screen-xl px-6" data-reveal>
-      <RelatedPosts currentSlug={slug} tags={tags} locale="en" maxPosts={3} />
     </div>
   )}
 
   <!-- Follow Along -->
-  <CTA variant="default" size="md" maxWidth="lg" glow={false} data-reveal class="bg-background-secondary">
     <h2 slot="heading" class="!text-4xl">Follow along</h2>
     <p slot="description" class="!text-lg text-balance">Stay in the loop — new articles, thoughts, and updates.</p>
 
