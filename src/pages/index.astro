@@ -21,8 +21,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 ---
 
 <LandingLayout
-  title="Astro Rocket — Astro 6 starter theme"
-  description="A production-ready Astro 6 starter with 12 beautiful themes, 57+ components, built-in i18n, dark mode and a fast, modern foundation to build anything on."
+  title="Amir Gireev Portfolio"
+  description="Website built with Astro"
   image="/og-default.svg"
   includePersonSchema={true}
   includeProfessionalServiceSchema={true}
@@ -73,7 +73,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
             <div class="flex-1 min-w-0">
               <h3 class="text-base font-semibold text-foreground">Game Development</h3>
               <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
-                Creating games and Programming AIs that play games. 
+                Developing games with 3D assets using Maya or Unity and Programming AIs that play games. 
               </p>
             </div>
           </div>
@@ -88,22 +88,22 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
             <div class="flex-1 min-w-0">
               <h3 class="text-base font-semibold text-foreground">Web Development</h3>
               <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
-              Websites built with modern tooling. Astro, Django, Html, CSS, Javascript and so on.
+              Building websites with Python, Django, Html, CSS, Javascript, Streamlit and so on.
               </p>
             </div>
           </div>
         </Card>
 
-        <!-- 3D Modeling -->
+        <!-- AI -->
         <Card hover>
           <div class="flex items-start gap-4">
             <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 flex items-center justify-center text-brand-500 shrink-0">
               <Icon name="zap" size="sm" />
             </div>
             <div class="flex-1 min-w-0">
-              <h3 class="text-base font-semibold text-foreground">3D Modeling</h3>
+              <h3 class="text-base font-semibold text-foreground">AI</h3>
               <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
-                Creating detailed and realistic 3D assets.
+                Using Rag, LLMs and Python to develop custom AI solutions from data assistants to game playing AI models 
               </p>
             </div>
           </div>
