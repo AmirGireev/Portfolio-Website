@@ -66,6 +66,7 @@ const projects = defineCollection({
     z.object({
       title: z.string(),
       description: z.string(),
+      category: z.enum(['ai-backend', 'graphics-gamedev']),
       url: z.string().url().optional(),
       repo: z.string().url().optional(),
       image: image().optional(),
