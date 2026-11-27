@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 const { category } = Astro.params;
 const { title } = Astro.props;
 
-// Holt nur Projekte der ausgewählten Kategorie
+// Kategorie filtern
 const items = await getCollection('projects', ({ data }) => !data.draft && data.category === category);
 const projects = items.sort((a, b) => a.data.order - b.data.order);
 ---

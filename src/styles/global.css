@@ -1,15 +1,11 @@
-/* =============================================================================
-   Astro Rocket Global Styles
-   =============================================================================
-   Vercel-inspired: Clean, minimal, sophisticated
-   ============================================================================= */
+/* Global styles */
 
 @import 'tailwindcss';
 @import './tokens/colors.css';
 @import './tokens/typography.css';
 @import './tokens/spacing.css';
 
-/* Self-hosted fonts via Fontsource (CSP-safe, no external requests) */
+/* Self-hosted fonts */
 @import '@fontsource-variable/manrope';
 @import '@fontsource-variable/outfit';
 @import '@fontsource-variable/jetbrains-mono';
@@ -17,9 +13,7 @@
 /* Dark mode variant */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* -------------------------------------------------------------------------
-   Tailwind Theme Configuration
-   ------------------------------------------------------------------------- */
+/* Tailwind Theme Configuration */
 @theme {
   /* Colors */
   --color-background: var(--background);
@@ -66,12 +60,12 @@
   --color-border-invert: var(--border-invert);
   --color-border-invert-strong: var(--border-invert-strong);
 
-  /* Typography - theme-controlled font stacks */
+  /* Typography */
   --font-sans: var(--theme-font-sans);
   --font-display: var(--theme-font-display);
   --font-mono: var(--theme-font-mono);
 
-  /* Brand Colors in Tailwind theme */
+  /* Brand colors */
   --color-brand-50: var(--brand-50);
   --color-brand-100: var(--brand-100);
   --color-brand-200: var(--brand-200);
@@ -83,7 +77,7 @@
   --color-brand-800: var(--brand-800);
   --color-brand-900: var(--brand-900);
 
-  /* Font Sizes - matches original design scale */
+  /* Font sizes */
   --font-size-xs: 0.75rem;     /* 12px */
   --font-size-sm: 0.875rem;    /* 14px */
   --font-size-base: 1rem;      /* 16px */
@@ -121,9 +115,7 @@
   --container-max: 1200px;
 }
 
-/* -------------------------------------------------------------------------
-   Base Layer
-   ------------------------------------------------------------------------- */
+/* Base Layer */
 @layer base {
   *,
   *::before,
@@ -146,8 +138,7 @@
     min-height: 100vh;
   }
 
-  /* Typography - headings use explicit foreground color to prevent any
-     gradient text effects from showing between heading characters */
+  /* Headings */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     line-height: 1.1;
@@ -160,7 +151,7 @@
   h3      { font-weight: 600; }
   h4, h5, h6 { font-weight: 500; }
 
-  /* Paragraphs inherit color for flexibility in dark sections */
+  /* Paragraphs */
 
   a {
     color: inherit;
@@ -201,19 +192,9 @@
   }
 }
 
-/* -------------------------------------------------------------------------
-   Utilities
-   ------------------------------------------------------------------------- */
+/* Utilities */
 @layer utilities {
-  /* Invert section - remaps Tailwind theme tokens for dark/contrast sections.
-
-     Architecture: All CSS property declarations in this file reference --color-*
-     tokens (the Tailwind namespace). @theme sets --color-* defaults on :root via
-     raw tokens; .invert-section overrides --color-* directly for section theming.
-
-     The `color` property is set explicitly so that unstyled child elements
-     (e.g. headings with no text-* class) inherit the correct inverted text color
-     rather than the body's root-level color. */
+  /* Invert section */
   .invert-section {
     color: var(--color-foreground);
 
@@ -350,7 +331,7 @@
     background-size: 16px 16px;
   }
 
-  /* Grid pattern - for hero sections (matches the React design) */
+  /* Grid pattern */
   .bg-grid-pattern {
     background-image:
       linear-gradient(to right, var(--gray-200) 1px, transparent 1px),
@@ -404,7 +385,7 @@
     }
   }
 
-  /* Sheet slide up from bottom */
+  /* Sheet slide */
   .animate-sheet-up {
     animation: sheet-up 0.25s cubic-bezier(0.32, 0.72, 0, 1) forwards;
   }
@@ -461,7 +442,7 @@
     }
   }
 
-  /* Mobile menu slide down */
+  /* Menu slide */
   .animate-menu-down {
     transform-origin: top;
     animation: menu-down 0.25s cubic-bezier(0.32, 0.72, 0, 1) forwards;
@@ -629,7 +610,7 @@
     }
   }
 
-  /* Reduced motion: disable micro-animations */
+  /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
     .animate-shake,
     .animate-tab-enter,
@@ -640,30 +621,25 @@
   }
 }
 
-/* -------------------------------------------------------------------------
-   Components
-   ------------------------------------------------------------------------- */
+/* Components */
 @layer components {
-  /* -------------------------------------------------------------------------
-     Navigation Component Tokens
-     Customize header navigation via these CSS custom properties
-     ------------------------------------------------------------------------- */
+  /* Nav tokens */
   :root {
-    /* Nav link - inactive state */
+    /* Nav inactive */
     --nav-link-color: var(--color-foreground-muted);
     --nav-link-bg: transparent;
     --nav-link-font-weight: 500;
 
-    /* Nav link - hover state */
+    /* Nav hover */
     --nav-link-hover-color: var(--color-foreground);
     --nav-link-hover-bg: var(--color-secondary);
 
-    /* Nav link - active state (current page) */
+    /* Nav active */
     --nav-link-active-color: var(--color-foreground);
     --nav-link-active-bg: var(--color-secondary);
     --nav-link-active-font-weight: 600;
 
-    /* Nav link - focus state */
+    /* Nav focus */
     --nav-link-focus-ring: var(--color-ring);
   }
 
@@ -847,9 +823,7 @@
     background: var(--color-background-secondary);
   }
 
-  /* -------------------------------------------------------------------------
-     Tooltip Component
-     ------------------------------------------------------------------------- */
+  /* Tooltip Component */
   .tooltip-wrapper {
     position: relative;
     display: inline-flex;
@@ -940,13 +914,7 @@
   }
 }
 
-/* -------------------------------------------------------------------------
-   Hero entrance & scroll-reveal animations
-   Outside every @layer so these rules are unlayered CSS — highest cascade
-   precedence — and never overridden by Tailwind-generated utilities.
-   Explicit cubic-bezier values replace var() references to guarantee the
-   transition shorthand is always valid.
-   ------------------------------------------------------------------------- */
+/* Reveal animations */
 
 @keyframes hero-slide-up {
   from { transform: translateY(28px); }
@@ -984,10 +952,7 @@
   }
 }
 
-/* ── Hero / CTA button styles ───────────────────────────────────────────────
-   Shared across all pages. Re-enable by applying these classes to buttons.
-   hero-btn-brand : brand-coloured primary action
-   hero-btn-learn : secondary action (outline in light, white pill in dark)   */
+/* Hero buttons */
 
 .hero-btn-brand {
   background-color: var(--color-brand-700) !important;
@@ -1001,7 +966,7 @@
   opacity: 0.85;
 }
 
-/* Header CTA — brand colour in light mode */
+/* Header CTA */
 :root:not(.dark) .hdr-cta-brand {
   background-color: var(--color-brand-500) !important;
   background-image: none !important;

@@ -1,14 +1,13 @@
 import type { ConsentConfig } from '@/lib/consent.types';
 
 const consentConfig: ConsentConfig = {
-  /** Bump to force re-consent when categories change */
+  /** Consent version */
   version: 1,
 
-  /** 'consent_mode_v2' = scripts load with denied defaults, cookieless pings
-   *  'strict' = scripts fully blocked until consent granted */
+  /** Consent mode */
   mode: 'consent_mode_v2',
 
-  /** localStorage key for stored preferences */
+  /** Storage key */
   storageKey: 'cookie-consent',
 
   categories: {
@@ -54,7 +53,7 @@ const consentConfig: ConsentConfig = {
     privacyPolicyLabel: 'Privacy Policy',
   },
 
-  /** Milliseconds before banner slides in */
+  /** Banner delay */
   showDelay: 500,
 };
 

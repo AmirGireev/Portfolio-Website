@@ -1,8 +1,5 @@
 ---
-/**
- * About page
- * URL: /about
- */
+/** About page */
 import PageLayout from '@/layouts/PageLayout.astro';
 import Icon from '@/components/ui/primitives/Icon/Icon.astro';
 import Badge from '@/components/ui/data-display/Badge/Badge.astro';
@@ -12,8 +9,8 @@ import { Hero } from '@/components/hero';
 import TypingEffect from '@/components/ui/TypingEffect.astro';
 ---
 <PageLayout
-  title="About Astro Rocket — Web Designer & Developer | Veghel"
-  description="Designer & developer — Crafting modern web experiences shaped by clean design, solid structure, and attention to detail."
+  title="About Amir Gireev"
+  description="About Amir Gireev, Media & Computer Science Student."
 >
   <Hero layout="centered" size="sm">
     <Badge slot="badge" variant="brand" pill>
@@ -26,9 +23,6 @@ import TypingEffect from '@/components/ui/TypingEffect.astro';
         <TypingEffect words={[ "Web Developer",   "Game Designer", "AI Engineer", "3D Designer"]} />
       </span>
     </h1>
-
-   
-
   </Hero>
   <section class="py-[var(--space-section-md)] bg-background-secondary border-t border-border">
     <div class="mx-auto max-w-2xl px-6 text-center" data-reveal>
@@ -104,17 +98,4 @@ import TypingEffect from '@/components/ui/TypingEffect.astro';
       </div>
     </div>
   </section>
-
-  
-
-        
-
-     
-
 </PageLayout>
-
-<style>
-  details[open] > summary .faq-icon {
-    transform: rotate(180deg);
-  }
-</style>

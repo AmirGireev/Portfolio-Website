@@ -1,8 +1,5 @@
 ---
-/**
- * Badge Component
- * Displays a small status indicator or label with proper icon spacing
- */
+/** Badge component */
 import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 import { badgeVariants } from './badge.variants';
@@ -10,9 +7,9 @@ import { badgeVariants } from './badge.variants';
 interface Props extends HTMLAttributes<'span'> {
   variant?: 'default' | 'success' | 'warning' | 'error' | 'info' | 'brand';
   size?: 'sm' | 'md';
-  /** Show a pulsing dot indicator */
+  /** Pulse dot */
   pulse?: boolean;
-  /** Use pill styling (fully rounded with shadow) */
+  /** Pill style */
   pill?: boolean;
 }
 

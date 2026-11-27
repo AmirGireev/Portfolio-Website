@@ -1,26 +1,5 @@
 ---
-/**
- * Header Component
- * Flexible navigation header with variant-based configuration
- *
- * Variants:
- * - layout: 'default' | 'centered' | 'minimal'
- * - position: 'fixed' | 'sticky' | 'static'
- * - size: 'sm' | 'md' | 'lg'
- * - variant: 'default' | 'solid' | 'transparent'
- * - colorScheme: 'default' | 'invert' (use 'invert' for dark backgrounds)
- * - shape: 'bar' | 'floating' (use 'floating' for capsule header)
- *
- * Features:
- * - Dynamic navigation from nav.config.ts (default) or custom nav prop
- * - Optional CTA button with customization
- * - Mobile menu with Escape key support
- * - Theme toggle
- * - GitHub/action buttons
- * - Full slot support for customization
- * - Inverted color scheme for use on dark/image backgrounds
- * - Floating capsule shape with scroll-reactive bg + color flip
- */
+/** Header component */
 import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 import { getNavItems, type NavItem as NavConfigItem } from '@/config/nav.config';
@@ -47,7 +26,7 @@ export interface HeaderAction {
 }
 
 interface Props extends HTMLAttributes<'header'> {
-  /** Layout style: default (logo left, nav right), centered (logo center), minimal (logo + cta only) */
+  /** Layout style */
   layout?: 'default' | 'centered' | 'minimal';
   /** Position behavior */
   position?: 'fixed' | 'sticky' | 'static';
@@ -55,27 +34,27 @@ interface Props extends HTMLAttributes<'header'> {
   size?: 'sm' | 'md' | 'lg';
   /** Background variant */
   variant?: 'default' | 'solid' | 'transparent';
-  /** Color scheme for text/icons - use 'invert' for dark backgrounds */
+  /** Color scheme */
   colorScheme?: 'default' | 'invert';
-  /** Shape: 'bar' (full-width, default) or 'floating' (centered capsule) */
+  /** Header shape */
   shape?: 'bar' | 'floating';
-  /** Override default navigation (replaces getNavRoutes()) */
+  /** Nav override */
   nav?: NavItem[];
-  /** Additional navigation items (e.g., #features for landing pages) */
+  /** Extra nav */
   extraNav?: NavItem[];
   /** Show CTA button */
   showCta?: boolean;
   /** CTA button configuration */
   cta?: { label?: string; href?: string; icon?: string };
-  /** Action buttons (GitHub, etc.) */
+  /** Action buttons */
   actions?: HeaderAction[];
-  /** Show theme toggle (default: true) */
+  /** Theme toggle */
   showThemeToggle?: boolean;
-  /** Show colour-theme selector swatches */
+  /** Theme selector */
   showThemeSelector?: boolean;
-  /** Show mobile menu (default: true) */
+  /** Mobile menu */
   showMobileMenu?: boolean;
-  /** Show active state for current page (default: true) */
+  /** Active state */
   showActiveState?: boolean;
   /** Logo text override */
   logoText?: string;
@@ -83,11 +62,11 @@ interface Props extends HTMLAttributes<'header'> {
   hideLogo?: boolean;
   /** Show language switcher */
   showLanguageSwitcher?: boolean;
-  /** Show social icon links (desktop/tablet only, reads from siteConfig.socialLinks) */
+  /** Social icons */
   showSocialLinks?: boolean;
-  /** Show scroll progress bar at the bottom of the header */
+  /** Progress bar */
   showScrollProgress?: boolean;
-  /** Position of the scroll progress bar: 'top' (above header) or 'bottom' (below header, default) */
+  /** Progress position */
   scrollProgressPosition?: 'top' | 'bottom';
 }
 
@@ -116,7 +95,7 @@ const {
   ...attrs
 } = Astro.props;
 
-// Shape + color scheme helpers
+// Style helpers
 const isFloating = shape === 'floating';
 const isInvert = colorScheme === 'invert';
 
@@ -127,13 +106,13 @@ const defaultNav = getNavItems().map((item: NavConfigItem) => ({
 }));
 const navItems: NavItem[] = nav || [...extraNav, ...defaultNav];
 
-// Current path for active state
+// Current path
 const currentPath = Astro.url.pathname;
 
-// Check if we're on the landing page
+// Landing check
 const isLandingPage = currentPath === '/';
 
-// Process CTA href for landing page anchor links
+// CTA href
 const ctaHref = cta.href?.startsWith('#') && !isLandingPage ? `/${cta.href}` : cta.href;
 
 // Check slots
@@ -149,17 +128,17 @@ const headerClasses = cn(
   className
 );
 
-// Compute inner container classes
+// Inner classes
 const innerClasses = headerInnerVariants({ size, shape });
 
-// Check if a nav item is active
+// Active check
 function isActive(href: string): boolean {
   if (!showActiveState) return false;
   if (href.startsWith('#')) return false;
   return currentPath === href || currentPath.startsWith(href + '/');
 }
 
-// Map a social URL to its icon name + accessible label
+// Social mapping
 function getSocialIconData(url: string): { icon: string; label: string } {
   if (url.includes('github.com'))    return { icon: 'github',    label: 'GitHub' };
   if (url.includes('instagram.com')) return { icon: 'instagram', label: 'Instagram' };
@@ -169,7 +148,7 @@ function getSocialIconData(url: string): { icon: string; label: string } {
   return { icon: 'link', label: 'Social' };
 }
 
-// Generate unique ID for this header instance
+// Unique ID
 const menuId = `mobile-menu-${Math.random().toString(36).slice(2, 9)}`;
 const buttonId = `${menuId}-button`;
 ---
@@ -422,7 +401,7 @@ const buttonId = `${menuId}-button`;
   }
 </header>
 
-{/* Mobile Menu Backdrop - positioned outside header to blur page content */}
+{/* Menu backdrop */}
 {
   showMobileMenu && layout !== 'minimal' && (
     <div
@@ -464,7 +443,7 @@ const buttonId = `${menuId}-button`;
         closeIcon!.classList.remove('hidden');
 
         if (isFloating) {
-          // Force scrolled state + flatten bottom corners
+          // Force scrolled
           header.setAttribute('data-scrolled', '');
           header.classList.remove('rounded-2xl');
           header.classList.add('rounded-t-2xl');
@@ -472,13 +451,13 @@ const buttonId = `${menuId}-button`;
           header.classList.add('!bg-background');
         }
 
-        // Fade out and blur the page content
+        // Blur content
         const mainContent = document.querySelector('main');
         const footer = document.querySelector('footer');
         if (mainContent) mainContent.classList.add('mobile-menu-blur');
         if (footer) footer.classList.add('mobile-menu-blur');
 
-        // Show menu and backdrop with animations
+        // Show menu
         menu!.classList.remove('hidden', 'animate-menu-up', 'opacity-0', 'scale-y-0');
         menu!.classList.add('animate-menu-down');
         if (backdrop) {
@@ -511,7 +490,7 @@ const buttonId = `${menuId}-button`;
         if (mainContent) mainContent.classList.remove('mobile-menu-blur');
         if (footer) footer.classList.remove('mobile-menu-blur');
 
-        // Wait for animation to complete before hiding
+        // Wait animation
         setTimeout(() => {
           menu!.classList.add('hidden', 'opacity-0', 'scale-y-0');
           if (backdrop) {
@@ -522,7 +501,7 @@ const buttonId = `${menuId}-button`;
             // Restore rounded corners
             header.classList.remove('rounded-t-2xl');
             header.classList.add('rounded-2xl');
-            // Only remove scrolled if actually at top
+            // Top check
             if (window.scrollY <= 60) {
               header.removeAttribute('data-scrolled');
             }
@@ -545,19 +524,19 @@ const buttonId = `${menuId}-button`;
 
       button.addEventListener('click', toggle);
 
-      // Close on backdrop click
+      // Backdrop close
       if (backdrop) {
         backdrop.addEventListener('click', close);
       }
 
-      // Close on Escape key
+      // Escape close
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && isOpen) {
           close();
         }
       });
 
-      // Close when clicking on mobile menu links
+      // Link close
       menu.querySelectorAll('a').forEach((link) => {
         link.addEventListener('click', close);
       });
@@ -595,7 +574,7 @@ const buttonId = `${menuId}-button`;
               header.classList.remove('bg-transparent');
             }
           } else {
-            // Don't remove if mobile menu is open
+            // Menu open
             const menuId = header.dataset.menuId;
             const menu = menuId ? document.getElementById(menuId) : null;
             const menuOpen = menu && !menu.classList.contains('hidden');
@@ -663,7 +642,7 @@ const buttonId = `${menuId}-button`;
     transition: opacity 200ms, filter 200ms;
   }
 
-  /* ===== Floating header: scroll state ===== */
+  /* Floating scroll */
   [data-header-shape="floating"][data-scrolled] {
     background: color-mix(in oklch, var(--color-background) 92%, transparent);
     backdrop-filter: blur(24px);
@@ -671,9 +650,9 @@ const buttonId = `${menuId}-button`;
     box-shadow: 0 4px 20px -6px rgba(0, 0, 0, 0.1);
   }
 
-  /* ===== Floating header: color flip (invert → normal on scroll) ===== */
+  /* Floating colors */
 
-  /* Text elements: on-invert → foreground */
+  /* Text colors */
   [data-header-shape="floating"][data-header-color-scheme="invert"] .hdr-invert-text {
     color: var(--color-on-invert);
     transition: color 300ms;
@@ -682,7 +661,7 @@ const buttonId = `${menuId}-button`;
     color: var(--color-foreground);
   }
 
-  /* Logo text: on-invert → brand-500 */
+  /* Logo color */
   [data-header-shape="floating"][data-header-color-scheme="invert"] .hdr-logo-text {
     color: var(--color-on-invert);
     transition: color 300ms;
@@ -691,7 +670,7 @@ const buttonId = `${menuId}-button`;
     color: var(--color-brand-500);
   }
 
-  /* Non-invert floating: use normal colors */
+  /* Normal colors */
   [data-header-shape="floating"][data-header-color-scheme="default"] .hdr-logo-text {
     color: var(--color-brand-500);
   }
@@ -703,7 +682,7 @@ const buttonId = `${menuId}-button`;
     color: var(--color-foreground);
   }
 
-  /* ===== Floating nav link underline indicators ===== */
+  /* Link underlines */
   [data-header-shape="floating"] .nav-link::after {
     content: '';
     position: absolute;
@@ -722,7 +701,7 @@ const buttonId = `${menuId}-button`;
     right: 12px;
   }
 
-  /* ===== CTA: invert color flip ===== */
+  /* CTA colors */
   [data-header-shape="floating"][data-header-color-scheme="invert"] .hdr-invert-cta {
     background: white;
     color: #111;

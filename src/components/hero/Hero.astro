@@ -4,19 +4,19 @@ import { cn } from '@/lib/cn';
 import { heroSectionVariants } from './hero.variants';
 
 interface Props extends HTMLAttributes<'section'> {
-  /** Layout mode: centered single column or split two-column */
+  /** Layout mode */
   layout?: 'centered' | 'split';
   /** Vertical padding size */
   size?: 'sm' | 'md' | 'lg' | 'xl';
-  /** Show background grid pattern */
+  /** Grid pattern */
   showGrid?: boolean;
-  /** Show brand-coloured radial glow blobs behind the content */
+  /** Glow blobs */
   showGlow?: boolean;
-  /** Fade the bottom of the section into the next section's background */
+  /** Bottom fade */
   bottomFade?: boolean;
-  /** Show an animated scroll indicator at the bottom (desktop only, hides on scroll) */
+  /** Scroll indicator */
   showScrollIndicator?: boolean;
-  /** Max-width class for the description wrapper (default: max-w-xl) */
+  /** Description width */
   descriptionClass?: string;
 }
 
@@ -32,14 +32,14 @@ const {
   ...attrs
 } = Astro.props;
 
-// Check which slots are provided
+// Slot checks
 const hasBadgeSlot = Astro.slots.has('badge');
 const hasTitleSlot = Astro.slots.has('title');
 const hasDescriptionSlot = Astro.slots.has('description');
 const hasActionsSlot = Astro.slots.has('actions');
 const hasAsideSlot = Astro.slots.has('aside');
 
-// Compute alignment based on layout
+// Alignment
 const alignment = layout === 'centered' ? 'text-center items-center' : 'text-left items-start';
 
 // Compute classes
@@ -133,11 +133,11 @@ const gridClasses = cn(
         </div>
       )}
 
-      {/* Default slot for additional content (social proof, etc.) */}
+      {/* Extra content */}
       <slot />
     </div>
 
-    {/* Aside Column (for split layout) */}
+    {/* Aside column */}
     {layout === 'split' && hasAsideSlot && (
       <div class="relative z-10 w-full order-2 lg:order-none">
         <slot name="aside" />
@@ -147,8 +147,7 @@ const gridClasses = cn(
 </section>
 
 <style>
-  /* Desktop-only: require both a minimum width and minimum height so phones
-     in landscape mode (wide but short) are excluded. */
+  /* Desktop only */
   .scroll-indicator-wrapper {
     display: none;
   }
@@ -159,7 +158,7 @@ const gridClasses = cn(
     }
   }
 
-  /* Fade in after the hero slide-up animation completes */
+  /* Delayed fade-in */
   .scroll-indicator {
     animation: si-fade-in 0.6s ease-out 1.4s backwards;
     transition: opacity 0.5s ease, transform 0.5s ease;
@@ -176,7 +175,7 @@ const gridClasses = cn(
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* First chevron bounces, second follows with a slight delay */
+  /* Chevron bounce */
   .scroll-indicator-chevron {
     animation: si-bounce 2s ease-in-out 2s infinite;
   }
@@ -198,9 +197,7 @@ const gridClasses = cn(
 </style>
 
 <script>
-  // Parallax: move [data-parallax] layers at a fraction of scroll speed.
-  // Elements with -inset-y-[20%] have extra room to move without clipping.
-  // Skipped entirely when the user prefers reduced motion.
+  // Parallax
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     function initParallax() {
       const layers = document.querySelectorAll<HTMLElement>('[data-parallax]');
@@ -212,11 +209,11 @@ const gridClasses = cn(
           if (!section) return;
 
           const rect = section.getBoundingClientRect();
-          // Skip sections fully outside the viewport
+          // Skip offscreen
           if (rect.bottom < 0 || rect.top > window.innerHeight) return;
 
           const speed = parseFloat(el.dataset.parallax ?? '0.3');
-          // Offset relative to how far the section top is from the viewport top
+          // Scroll offset
           const offset = -rect.top * speed;
           el.style.transform = `translateY(${offset.toFixed(2)}px)`;
         });
@@ -233,7 +230,7 @@ const gridClasses = cn(
     document.addEventListener('astro:page-load', initParallax);
   }
 
-  // Scroll indicator: fade out once the user starts scrolling.
+  // Indicator fade
   function initScrollIndicator() {
     const indicator = document.querySelector<HTMLElement>('.scroll-indicator');
     if (!indicator) return;

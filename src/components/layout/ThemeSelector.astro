@@ -1,19 +1,12 @@
 ---
-/**
- * ThemeSelector
- * A row of twelve colour swatches that switches the active colour theme at
- * runtime by writing `data-theme` on <html> and persisting to sessionStorage.
- *
- * Usage in Header:  <ThemeSelector />
- * Pass `class` to tint the label colour for floating / inverted headers.
- */
+/** Theme selector */
 interface Props {
   class?: string;
 }
 
 const { class: className } = Astro.props;
 
-// All 12 themes in Tailwind color order
+// Theme list
 const themes = [
   { id: 'orange',  name: 'Orange',  color: 'oklch(62.5% 0.22  38)'  },
   { id: 'amber',   name: 'Amber',   color: 'oklch(68%   0.19  75)'  },
@@ -48,7 +41,7 @@ const themes = [
 </div>
 
 <style>
-  /* Inactive: subtle border + dimmed so active pops without extra decoration */
+  /* Inactive */
   .theme-swatch {
     box-shadow: inset 0 0 0 1px oklch(0% 0 0 / 0.12);
     opacity: 0.55;
@@ -57,7 +50,7 @@ const themes = [
       transform 150ms ease;
   }
 
-  /* Active: full opacity + slim underline pill in the swatch colour */
+  /* Active */
   .theme-swatch[data-active] {
     opacity: 1;
     box-shadow: inset 0 0 0 1px oklch(0% 0 0 / 0.12);
@@ -75,7 +68,7 @@ const themes = [
     border-radius: 1px;
   }
 
-  /* Hover: lift opacity on inactive */
+  /* Hover */
   .theme-swatch:not([data-active]):hover {
     opacity: 0.85;
     transform: scale(1.1);
@@ -98,7 +91,7 @@ const themes = [
     document.documentElement.setAttribute('data-theme', id);
     try { sessionStorage.setItem(STORAGE_KEY, id); } catch { /* private mode */ }
 
-    // Update every swatch on the page (handles multiple selector instances)
+    // Update swatches
     const swatches = document.querySelectorAll<HTMLButtonElement>('.theme-swatch');
     swatches.forEach((btn) => {
       if (btn.dataset.themeId === id) {
@@ -121,7 +114,7 @@ const themes = [
         btn.removeAttribute('data-active');
       }
 
-      // Guard against double-binding across re-runs
+      // Bind guard
       if (btn.dataset.selectorInit) return;
       btn.dataset.selectorInit = 'true';
 

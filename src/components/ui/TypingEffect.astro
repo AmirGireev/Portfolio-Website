@@ -1,14 +1,14 @@
 ---
 interface Props {
-  /** Array of strings to cycle through */
+  /** Words */
   words: string[];
-  /** Typing speed in ms per character */
+  /** Typing speed */
   typeSpeed?: number;
-  /** Deleting speed in ms per character */
+  /** Deleting speed */
   deleteSpeed?: number;
-  /** Pause after fully typed, in ms */
+  /** Typed pause */
   pauseAfterType?: number;
-  /** Pause after fully deleted, in ms */
+  /** Deleted pause */
   pauseAfterDelete?: number;
 }
 
@@ -54,7 +54,7 @@ const id = `typing-${Math.random().toString(36).slice(2, 8)}`;
     if (!root) return;
     const textEl = root.querySelector('.typing-text');
 
-    // Lock the element width to the widest word so the layout never shifts
+    // Lock width
     const measurer = document.createElement('span');
     measurer.setAttribute('aria-hidden', 'true');
     measurer.style.cssText = 'visibility:hidden;position:absolute;white-space:nowrap;pointer-events:none;';
@@ -65,7 +65,7 @@ const id = `typing-${Math.random().toString(36).slice(2, 8)}`;
 
     let maxWidth = 0;
     for (const word of words) {
-      measurer.textContent = word + '|'; // include cursor character in measurement
+      measurer.textContent = word + '|'; // Include cursor
       maxWidth = Math.max(maxWidth, measurer.offsetWidth);
     }
     document.body.removeChild(measurer);
@@ -103,13 +103,13 @@ const id = `typing-${Math.random().toString(36).slice(2, 8)}`;
       }
     }
 
-    // Start after a short initial delay so the page paint settles
+    // Initial delay
     timer = setTimeout(tick, 600);
 
-    // Clean up pending timer when navigating away
+    // Cleanup timer
     document.addEventListener('astro:before-swap', () => clearTimeout(timer), { once: true });
   }
 
-  // Run on initial load and on every client-side navigation back to this page
+  // Init
   document.addEventListener('astro:page-load', startTyping);
 </script>

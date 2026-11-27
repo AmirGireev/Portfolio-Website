@@ -1,9 +1,4 @@
-/**
- * Navigation Configuration
- *
- * Defines which pages appear in the site navigation and their display order.
- * Astro handles routing via the filesystem — this only controls nav menus.
- */
+/** Navigation config */
 
 export interface NavItem {
   label: string;
@@ -16,9 +11,7 @@ export const navItems: NavItem[] = [
   { label: 'About', href: '/about', order: 2 },
 ];
 
-/**
- * Get navigation items sorted by order
- */
+/** Sorted items */
 export function getNavItems(): NavItem[] {
   return [...navItems].sort((a, b) => a.order - b.order);
 }

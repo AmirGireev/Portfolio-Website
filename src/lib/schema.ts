@@ -10,9 +10,7 @@ import type {
 } from 'schema-dts';
 import siteConfig from '@/config/site.config';
 
-/**
- * Create WebSite schema for homepage
- */
+/** Website schema */
 export function createWebsiteSchema(): WithContext<WebSite> {
   return {
     '@context': 'https://schema.org',
@@ -23,31 +21,26 @@ export function createWebsiteSchema(): WithContext<WebSite> {
   };
 }
 
-/**
- * Create Person schema for Astro Rocket
- */
+/** Person schema */
 export function createPersonSchema(): WithContext<Person> {
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: 'Astro Rocket',
-    jobTitle: 'Web Designer & Developer',
+    name: siteConfig.author,
+    jobTitle: 'Media & Computer Science Student',
     url: siteConfig.url,
     email: siteConfig.email,
     ...(siteConfig.authorImage ? { image: `${siteConfig.url}${siteConfig.authorImage}` } : {}),
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Veghel',
-      addressRegion: 'Noord-Brabant',
-      addressCountry: 'NL',
+      addressLocality: 'Berlin',
+      addressCountry: 'DE',
     },
     sameAs: siteConfig.socialLinks,
   };
 }
 
-/**
- * Create ProfessionalService schema for local SEO
- */
+/** Service schema */
 export function createProfessionalServiceSchema(): WithContext<LocalBusiness> {
   return {
     '@context': 'https://schema.org',
@@ -59,21 +52,18 @@ export function createProfessionalServiceSchema(): WithContext<LocalBusiness> {
     ...(siteConfig.authorImage ? { image: `${siteConfig.url}${siteConfig.authorImage}` } : {}),
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Veghel',
-      addressRegion: 'Noord-Brabant',
-      addressCountry: 'NL',
+      addressLocality: 'Berlin',
+      addressCountry: 'DE',
     },
     areaServed: [
-      { '@type': 'Country', name: 'Netherlands' },
+      { '@type': 'Country', name: 'Germany' },
       { '@type': 'Country', name: 'Worldwide' },
     ],
     sameAs: siteConfig.socialLinks,
   };
 }
 
-/**
- * Create Organization schema
- */
+/** Create Organization schema */
 export function createOrganizationSchema(): WithContext<Organization> {
   const logoUrl = siteConfig.branding.logo.imageUrl
     ? `${siteConfig.url}${siteConfig.branding.logo.imageUrl}`
@@ -95,9 +85,7 @@ export function createOrganizationSchema(): WithContext<Organization> {
   };
 }
 
-/**
- * Create BlogPosting schema for blog posts
- */
+/** BlogPosting schema */
 export function createBlogPostSchema(post: {
   title: string;
   description: string;
@@ -140,9 +128,7 @@ export function createBlogPostSchema(post: {
   };
 }
 
-/**
- * Create BreadcrumbList schema
- */
+/** Create BreadcrumbList schema */
 export function createBreadcrumbSchema(
   items: Array<{ name: string; url: string }>
 ): WithContext<BreadcrumbList> {
@@ -158,9 +144,7 @@ export function createBreadcrumbSchema(
   };
 }
 
-/**
- * Create FAQPage schema
- */
+/** Create FAQPage schema */
 export function createFAQSchema(
   faqs: Array<{ question: string; answer: string }>
 ): WithContext<FAQPage> {

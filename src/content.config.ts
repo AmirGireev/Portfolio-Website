@@ -21,7 +21,7 @@ const blog = defineCollection({
     }),
 });
 
-// Pages collection for static pages
+// Pages collection
 const pages = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/pages' }),
   schema: z.object({

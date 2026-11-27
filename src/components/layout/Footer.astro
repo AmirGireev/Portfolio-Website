@@ -1,21 +1,5 @@
 ---
-/**
- * Footer Component
- * Flexible footer with variant-based configuration
- *
- * Layouts:
- * - simple: Single row with logo, nav links, and social
- * - columns: Multi-column layout with link groups
- * - minimal: Just copyright
- * - stacked: Vertically stacked logo, nav, copyright
- *
- * Features:
- * - Dynamic navigation from nav.config.ts (default) or custom nav prop
- * - Social links with icon support
- * - Copyright with {year} placeholder
- * - Legal links section
- * - Full slot support for customization
- */
+/** Footer component */
 import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 import { getNavItems, type NavItem as NavConfigItem } from '@/config/nav.config';
@@ -49,13 +33,13 @@ export interface LegalLink {
 interface Props extends HTMLAttributes<'footer'> {
   /** Layout style */
   layout?: 'simple' | 'columns' | 'minimal' | 'stacked';
-  /** Number of columns (only for columns layout) */
+  /** Column count */
   columns?: 2 | 3 | 4;
   /** Background variant */
   background?: 'default' | 'secondary' | 'invert';
   /** Override default navigation */
   nav?: NavItem[];
-  /** Link groups for columns layout */
+  /** Link groups */
   linkGroups?: FooterLinkGroup[];
   /** Social media links */
   socialLinks?: SocialLink[];
@@ -63,13 +47,13 @@ interface Props extends HTMLAttributes<'footer'> {
   showSocial?: boolean;
   /** Show copyright */
   showCopyright?: boolean;
-  /** Custom copyright text (supports {year} and {siteName} placeholders) */
+  /** Copyright text */
   copyright?: string;
-  /** Legal links (Privacy, Terms, etc.) */
+  /** Legal links */
   legalLinks?: LegalLink[];
   /** Hide logo */
   hideLogo?: boolean;
-  /** Tagline text under logo */
+  /** Tagline */
   tagline?: string;
 }
 
@@ -97,7 +81,7 @@ const defaultNav: NavItem[] = getNavItems().map((item: NavConfigItem) => ({
 }));
 const navItems: NavItem[] = nav || defaultNav;
 
-// Default external links if none provided via nav
+// Default links
 const allNavItems: NavItem[] = nav ? navItems : navItems;
 
 // Process copyright text
@@ -116,14 +100,14 @@ const hasBottomSlot = Astro.slots.has('bottom');
 // Compute footer classes
 const footerClasses = cn(footerVariants({ background }), className);
 
-// Social platform to icon mapping
+// Social icons
 const socialIcons: Record<string, string> = {
   github: 'github',
   twitter: 'x-twitter',
   linkedin: 'linkedin',
 };
 
-// Get icon for social platform
+// Social icon
 function getSocialIcon(platform: string): string {
   return socialIcons[platform] || platform;
 }
@@ -219,7 +203,7 @@ function getSocialIcon(platform: string): string {
                   {hasTaglineSlot ? <slot name="tagline" /> : tagline}
                 </p>
               )}
-              {/* Social Links in columns layout */}
+              {/* Social links */}
               {showSocial && socialLinks.length > 0 && (
                 <div class="flex items-center gap-[var(--space-stack-md)] pt-2">
                   {socialLinks.map((social) => (
@@ -381,6 +365,6 @@ function getSocialIcon(platform: string): string {
     )}
   </div>
 
-  {/* Default slot for additional content */}
+  {/* Extra content */}
   <slot />
 </footer>

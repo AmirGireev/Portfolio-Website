@@ -63,7 +63,7 @@ export function Switch({
         <span className={cn(switchThumbVariants({ size, checked: isChecked }))} />
       </button>
 
-      {/* Hidden input for form submission */}
+      {/* Hidden input */}
       {name && (
         <input type="hidden" name={name} value={isChecked ? (value || 'on') : ''} />
       )}
