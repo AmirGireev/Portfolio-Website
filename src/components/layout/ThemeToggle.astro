@@ -20,7 +20,7 @@ const { class: className } = Astro.props;
   )}
   aria-label="Toggle theme"
 >
-  <!-- Sun icon (shown in dark mode) -->
+  <!-- Sun icon -->
   <svg
     class="h-5 w-5 hidden dark:block"
     xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ const { class: className } = Astro.props;
     />
   </svg>
 
-  <!-- Moon icon (shown in light mode) -->
+  <!-- Moon icon -->
   <svg
     class="h-5 w-5 block dark:hidden"
     xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +59,7 @@ const { class: className } = Astro.props;
   function initThemeToggle() {
     const toggle = document.getElementById('theme-toggle');
 
-    // Guard: skip if not found or already initialised on this element
+    // Init guard
     if (!toggle || toggle.dataset.themeInit) return;
     toggle.dataset.themeInit = 'true';
 
@@ -76,7 +76,7 @@ const { class: className } = Astro.props;
     });
   }
 
-  // Run on initial load and after every view-transition swap
+  // Init
   initThemeToggle();
   document.addEventListener('astro:after-swap', initThemeToggle);
 </script>

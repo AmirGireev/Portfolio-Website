@@ -16,7 +16,7 @@ interface Props {
 
 const { items, class: className } = Astro.props;
 
-// Build schema items with full URLs
+// Schema items
 const schemaItems = items.map((item) => ({
   name: item.label,
   url: item.href ? new URL(item.href, siteConfig.url).toString() : siteConfig.url,

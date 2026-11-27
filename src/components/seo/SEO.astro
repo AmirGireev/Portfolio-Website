@@ -30,7 +30,7 @@ const pageTitle = title ? `${title} — ${siteConfig.name}` : siteConfig.name;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-// Process image - fall back to the static default OG image
+// OG image
 let ogImage: string;
 if (image) {
   ogImage = image.startsWith('http') ? image : new URL(image, Astro.site).toString();
@@ -40,7 +40,7 @@ if (image) {
 
 const robotsContent = [noindex ? 'noindex' : 'index', nofollow ? 'nofollow' : 'follow'].join(', ');
 
-// Normalize BCP-47 locale (e.g. "en") to OG language_TERRITORY format (e.g. "en_US")
+// OG locale
 const localeMap: Record<string, string> = {
   en: 'en_US', fr: 'fr_FR', de: 'de_DE', es: 'es_ES', it: 'it_IT',
   pt: 'pt_BR', nl: 'nl_NL', ja: 'ja_JP', ko: 'ko_KR', zh: 'zh_CN',
@@ -51,7 +51,7 @@ const locale = rawLocale.includes('_') || rawLocale.includes('-')
   ? rawLocale.replace('-', '_')
   : (localeMap[rawLocale] || `${rawLocale}_${rawLocale.toUpperCase()}`);
 
-// Determine OG image MIME type from file extension
+// Image type
 const extToMime: Record<string, string> = {
   '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
   '.webp': 'image/webp', '.gif': 'image/gif', '.svg': 'image/svg+xml',

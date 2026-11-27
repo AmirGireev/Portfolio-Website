@@ -1,11 +1,5 @@
 ---
-/**
- * ConsentBanner Component
- *
- * Cookie consent UI with Google Consent Mode v2 integration.
- * Shows a banner with Accept/Decline + Customize settings panel using Dialog.
- * Only renders when PUBLIC_CONSENT_ENABLED is true.
- */
+/** Consent banner */
 import { PUBLIC_CONSENT_ENABLED, PUBLIC_PRIVACY_POLICY_URL } from 'astro:env/client';
 import consentConfig from '@/config/consent.config';
 import Dialog from '@/components/ui/overlay/Dialog';
@@ -30,21 +24,21 @@ const {
 const consentEnabled = PUBLIC_CONSENT_ENABLED;
 const privacyPolicyUrl = PUBLIC_PRIVACY_POLICY_URL;
 
-// Merge UI text: props override config defaults
+// Merge text
 const ui = { ...consentConfig.ui, ...uiOverrides };
 const alwaysOnLabel = alwaysOnLabelProp ?? ui.alwaysOnLabel ?? 'Always on';
 const privacyPolicyLabel = ui.privacyPolicyLabel ?? 'Privacy Policy';
 
 const isTop = position === 'top';
 
-// Build category → GCM type mapping for dynamic GCM updates
+// Category mapping
 const categoryGcmMap: Record<string, string[]> = {};
 for (const [key, cat] of Object.entries(consentConfig.categories)) {
   categoryGcmMap[key] = cat.gcmTypes;
 }
 const categoryGcmMapJson = JSON.stringify(categoryGcmMap);
 
-// Serialize config for client-side use
+// Client config
 const configJson = JSON.stringify(consentConfig);
 ---
 
@@ -93,7 +87,7 @@ const configJson = JSON.stringify(consentConfig);
       </div>
     </div>
 
-    <!-- Settings Panel via Dialog -->
+    <!-- Settings panel -->
     <Dialog id="consent-settings" title={ui.settingsHeading} size="md">
       <div class="consent-settings-body">
         {Object.entries(consentConfig.categories).map(([key, cat]) => (
@@ -138,7 +132,7 @@ const configJson = JSON.stringify(consentConfig);
       </svg>
     </button>
 
-    <!-- Config data for client script -->
+    <!-- Config data -->
     <script is:inline type="application/json" id="consent-config-data" set:html={configJson} />
     <script is:inline type="application/json" id="consent-gcm-map-data" set:html={categoryGcmMapJson} />
 
@@ -191,7 +185,7 @@ const configJson = JSON.stringify(consentConfig);
           return prefs;
         }
 
-        // ── GCM update (dynamic mapping) ──
+        // GCM update
         function updateGCM(categories: Record<string, boolean>) {
           if (typeof w.gtag !== 'function') {
             w.dataLayer = w.dataLayer || [];
@@ -211,7 +205,7 @@ const configJson = JSON.stringify(consentConfig);
           w.gtag('consent', 'update', gcm);
         }
 
-        // ── Strict mode: dynamically inject analytics ──
+        // Inject analytics
         function injectAnalyticsStrict(categories: Record<string, boolean>) {
           if (MODE !== 'strict') return;
           const analyticsGranted = Object.keys(categoryGcmMap).some(function(catKey) {
@@ -294,7 +288,7 @@ const configJson = JSON.stringify(consentConfig);
           if (btn) btn.classList.remove('consent-reopener--visible');
         }
 
-        // ── Settings panel (via Dialog API) ──
+        // Settings panel
         function openSettings() {
           const stored = getStored();
           Object.keys(config.categories).forEach(function(key: string) {
@@ -319,7 +313,7 @@ const configJson = JSON.stringify(consentConfig);
         // ── Global API ──
         w.openConsentSettings = openSettings;
 
-        // ── Build categories from toggles ──
+        // Build categories
         function getCategoriesFromToggles() {
           const cats: Record<string, boolean> = {};
           Object.keys(config.categories).forEach(function(key: string) {
@@ -370,7 +364,7 @@ const configJson = JSON.stringify(consentConfig);
           setTimeout(showBanner, DELAY);
         }
 
-        // ── Re-show banner when Dialog closes without saving ──
+        // Re-show banner
         function watchDialogClose() {
           const dialogEl = document.getElementById('consent-settings');
           if (!dialogEl) return;
@@ -436,7 +430,7 @@ const configJson = JSON.stringify(consentConfig);
           watchDialogClose();
         }
 
-        // Run on page load and view transitions
+        // Init
         function setup() {
           init();
           bindEvents();

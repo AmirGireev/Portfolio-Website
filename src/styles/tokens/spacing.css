@@ -1,13 +1,7 @@
-/* =============================================================================
-   Astro Rocket Design Tokens - Spacing
-   =============================================================================
-   4px base unit spacing system
-   ============================================================================= */
+/* Spacing tokens */
 
 :root {
-  /* ---------------------------------------------------------------------------
-     Spacing Scale (4px base unit)
-     --------------------------------------------------------------------------- */
+  /* Spacing scale */
   --space-0: 0;
   --space-px: 1px;
   --space-0-5: 0.125rem; /* 2px */
@@ -44,9 +38,7 @@
   --space-80: 20rem; /* 320px */
   --space-96: 24rem; /* 384px */
 
-  /* ---------------------------------------------------------------------------
-     Semantic Spacing
-     --------------------------------------------------------------------------- */
+  /* Semantic Spacing */
   --space-section: clamp(var(--space-16), 10vw, var(--space-24));
   --space-section-header: clamp(var(--space-4), 2vw, var(--space-6));
   --space-container-x: clamp(var(--space-4), 5vw, var(--space-8));
@@ -57,32 +49,22 @@
   --space-inline-md: var(--space-4);
   --space-inline-lg: var(--space-6);
 
-  /* ---------------------------------------------------------------------------
-     Section Padding - Size Variants
-     --------------------------------------------------------------------------- */
+  /* Section padding */
   --space-section-sm: clamp(var(--space-12), 6vw, var(--space-16));
   --space-section-md: clamp(var(--space-16), 8vw, var(--space-24));
   --space-section-lg: clamp(var(--space-20), 10vw, var(--space-32));
   --space-section-xl: clamp(var(--space-28), 12vw, var(--space-40));
 
-  /* ---------------------------------------------------------------------------
-     Section Grid Gaps - Fluid Scaling
-     --------------------------------------------------------------------------- */
+  /* Section gaps */
   --space-section-gap: clamp(var(--space-8), 5vw, var(--space-12));
 
-  /* ---------------------------------------------------------------------------
-     Content Block Spacing
-     --------------------------------------------------------------------------- */
+  /* Content Block Spacing */
   --space-content-gap: clamp(var(--space-4), 3vw, var(--space-8));
 
-  /* ---------------------------------------------------------------------------
-     Heading Margins
-     --------------------------------------------------------------------------- */
-  --space-heading-gap: var(--space-6); /* 24px - consistent heading bottom margin */
+  /* Heading Margins */
+  --space-heading-gap: var(--space-6); /* Heading margin */
 
-  /* ---------------------------------------------------------------------------
-     Page Top Spacing (after fixed header)
-     --------------------------------------------------------------------------- */
-  --space-page-top: var(--space-32); /* 128px - clearance for fixed header + breathing room */
-  --space-page-top-sm: var(--space-24); /* 96px - smaller top clearance */
+  /* Page top spacing */
+  --space-page-top: var(--space-32); /* Header clearance */
+  --space-page-top-sm: var(--space-24); /* Smaller clearance */
 }

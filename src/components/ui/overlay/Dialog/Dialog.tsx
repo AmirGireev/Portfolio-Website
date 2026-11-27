@@ -48,13 +48,13 @@ export function Dialog({
     ).filter((el) => !el.hasAttribute('disabled'));
   }, []);
 
-  // Body scroll lock and focus management on open/close
+  // Scroll lock
   useEffect(() => {
     if (open) {
       previousActiveElementRef.current = document.activeElement as HTMLElement;
       document.body.classList.add('overflow-hidden');
 
-      // Focus first focusable element after render
+      // Focus first
       requestAnimationFrame(() => {
         const focusable = getFocusableElements();
         if (focusable.length > 0) {
@@ -71,7 +71,7 @@ export function Dialog({
     };
   }, [open, getFocusableElements]);
 
-  // Focus trap and Escape key
+  // Focus trap
   useEffect(() => {
     if (!open) return;
 

@@ -79,18 +79,17 @@ if (includeProfessionalServiceSchema) {
     />
 
     <!-- RSS Feed -->
-    <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name} RSS Feed`} href="/rss.xml" />
 
     <!-- JSON-LD Structured Data -->
     <JsonLd schema={schemas} />
 
-    <!-- Analytics (loads if PUBLIC_GA_MEASUREMENT_ID or PUBLIC_GTM_ID is set) -->
+    <!-- Analytics -->
     <Analytics />
 
-    <!-- View Transitions (client-side routing with animated page transitions) -->
+    <!-- View transitions -->
     <ClientRouter />
 
-    <!-- Dynamic favicon: syncs letter (first letter of site name) and color (brand-500) with active theme -->
+    <!-- Dynamic favicon -->
     <script is:inline define:vars={{ _faviconLetter: siteConfig.name.charAt(0).toUpperCase() }}>
       (function () {
         const LETTER = _faviconLetter;
@@ -118,7 +117,7 @@ if (includeProfessionalServiceSchema) {
         if (!window.__faviconListenerInit) {
           window.__faviconListenerInit = true;
 
-          // Re-run whenever data-theme or dark/light class changes
+          // Theme observer
           new MutationObserver(function (mutations) {
             for (let i = 0; i < mutations.length; i++) {
               if (mutations[i].attributeName === 'data-theme' || mutations[i].attributeName === 'class') {
@@ -128,13 +127,13 @@ if (includeProfessionalServiceSchema) {
             }
           }).observe(document.documentElement, { attributes: true });
 
-          // Re-run after Astro view transitions swap the head
+          // After swap
           document.addEventListener('astro:after-swap', updateFavicon);
         }
       })();
     </script>
 
-    <!-- Theme script (runs before body paint; <html> starts with class="dark" as default) -->
+    <!-- Theme script -->
     <script is:inline>
       (function () {
         const COLOR_THEMES = ['orange', 'amber', 'lime', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'magenta'];
@@ -150,7 +149,7 @@ if (includeProfessionalServiceSchema) {
           } catch (_) { /* ignored */ }
 
           try {
-            // Color theme — persisted in sessionStorage so it resets to sky on every new visit
+            // Color theme
             const saved = sessionStorage.getItem('color-theme');
             if (saved && COLOR_THEMES.indexOf(saved) !== -1) {
               el.setAttribute('data-theme', saved);
@@ -176,7 +175,7 @@ if (includeProfessionalServiceSchema) {
   </head>
 
   <body class="min-h-screen bg-background text-foreground antialiased" data-eager-reveal={eagerReveal ? '' : undefined}>
-    <!-- Skip to content link -->
+    <!-- Skip link -->
     <a
       href="#main-content"
       class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
@@ -194,14 +193,14 @@ if (includeProfessionalServiceSchema) {
 
     <ConsentBanner />
 
-    <!-- Back to top button -->
+    <!-- Back to top -->
     <button
       id="back-to-top"
       aria-label="Back to top"
       class="fixed bottom-6 right-6 z-50 h-12 w-12"
       style="opacity:0;translate:0 2rem;pointer-events:none"
     >
-      <!-- Scroll-progress ring (rotated so arc starts at 12 o'clock) -->
+      <!-- Progress ring -->
       <svg class="absolute inset-0 h-full w-full -rotate-90" viewBox="0 0 48 48" aria-hidden="true">
         <!-- Faint grey track -->
         <circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" class="text-border" stroke-width="2" opacity="0.5" />
@@ -229,7 +228,7 @@ if (includeProfessionalServiceSchema) {
           let ticking = false;
           let visible = false;
 
-          // Ensure initial hidden state is applied via JS (guards against any cascade override)
+          // Hidden state
           btn.style.opacity = '0';
           btn.style.translate = '0 2rem';
           btn.style.pointerEvents = 'none';
@@ -296,7 +295,7 @@ if (includeProfessionalServiceSchema) {
       })();
     </script>
 
-    <!-- Scroll reveal: adds .is-visible to [data-reveal] elements as they enter the viewport -->
+    <!-- Scroll reveal -->
     <script is:inline>
       (function () {
         function initReveal() {

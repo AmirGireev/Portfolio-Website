@@ -1,9 +1,5 @@
 ---
-/**
- * Switch Component
- * A toggle switch for binary on/off states.
- * Uses a hidden checkbox for accessibility.
- */
+/** Switch component */
 import { cn } from '@/lib/cn';
 import { generateId } from '@/lib/utils';
 
@@ -104,7 +100,7 @@ const thumbSizes = {
 </div>
 
 <style>
-  /* Use :has() for checked state since peer-checked can't reach nested thumb */
+  /* Checked state */
   label:has(input:checked) [data-thumb][data-size="sm"] {
     --tw-translate-x: 1rem;    /* translate-x-4 */
   }

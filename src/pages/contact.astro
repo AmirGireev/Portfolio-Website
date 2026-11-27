@@ -1,8 +1,5 @@
 ---
-/**
- * Contact page
- * URL: /contact
- */
+/** Contact page */
 import PageLayout from '@/layouts/PageLayout.astro';
 import Icon from '@/components/ui/primitives/Icon/Icon.astro';
 import Badge from '@/components/ui/data-display/Badge/Badge.astro';
@@ -34,7 +31,7 @@ const channels = [
 ---
 
 <PageLayout
-  title="Contact — Astro Rocket"
+  title="Contact — Amir Gireev"
   description="Get in touch"
   eagerReveal
 >
@@ -58,14 +55,14 @@ const channels = [
     <div class="mx-auto max-w-5xl px-6">
       <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-stretch">
 
-        <!-- Left column: contact form -->
+        <!-- Left column -->
         <div class="lg:col-span-3 h-full" data-reveal>
           <Card padding="lg" class="h-full flex flex-col justify-center">
             <h2 class="font-display text-xl font-bold text-foreground mb-6">Send a message</h2>
           </Card>
         </div>
 
-        <!-- Right column: contact channels -->
+        <!-- Right column -->
         <div class="lg:col-span-2 space-y-4" data-reveal data-reveal-delay="1">
           <div>
             <h2 class="font-display text-lg font-bold text-foreground mb-1">Other channels</h2>

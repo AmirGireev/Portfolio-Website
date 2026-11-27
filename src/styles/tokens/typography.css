@@ -1,15 +1,7 @@
-/* =============================================================================
-   Astro Rocket Design Tokens - Typography
-   =============================================================================
-   Fluid typography using clamp() for responsive sizing.
-   Font families are theme-controlled — see themes/*.css
-   ============================================================================= */
+/* Typography tokens */
 
 :root {
-  /* ---------------------------------------------------------------------------
-     Font Sizes - Fluid Typography
-     Using clamp(min, preferred, max) for smooth scaling
-     --------------------------------------------------------------------------- */
+  /* Font sizes */
   --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
   --text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 0.9375rem);
   --text-base: clamp(1rem, 0.925rem + 0.375vw, 1.0625rem);
@@ -20,9 +12,7 @@
   --text-4xl: clamp(2.25rem, 1.75rem + 2.5vw, 3.25rem);
   --text-5xl: clamp(3rem, 2.25rem + 3.75vw, 4.5rem);
 
-  /* ---------------------------------------------------------------------------
-     Line Heights
-     --------------------------------------------------------------------------- */
+  /* Line Heights */
   --leading-none: 1;
   --leading-tight: 1.25;
   --leading-snug: 1.375;
@@ -30,9 +20,7 @@
   --leading-relaxed: 1.625;
   --leading-loose: 2;
 
-  /* ---------------------------------------------------------------------------
-     Letter Spacing
-     --------------------------------------------------------------------------- */
+  /* Letter Spacing */
   --tracking-tighter: -0.05em;
   --tracking-tight: -0.025em;
   --tracking-normal: 0;
@@ -40,9 +28,7 @@
   --tracking-wider: 0.05em;
   --tracking-widest: 0.1em;
 
-  /* ---------------------------------------------------------------------------
-     Font Weights
-     --------------------------------------------------------------------------- */
+  /* Font Weights */
   --weight-thin: 100;
   --weight-extralight: 200;
   --weight-light: 300;

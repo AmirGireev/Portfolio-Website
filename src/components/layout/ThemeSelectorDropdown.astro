@@ -1,9 +1,5 @@
 ---
-/**
- * ThemeSelectorDropdown
- * A dropdown button for desktop that exposes the colour-theme swatches.
- * The mobile menu still uses the flat ThemeSelector component.
- */
+/** Theme dropdown */
 import { cn } from '@/lib/cn';
 
 interface Props {
@@ -12,7 +8,7 @@ interface Props {
 
 const { class: className } = Astro.props;
 
-// All 13 themes in Tailwind color order
+// Theme list
 const themes = [
   { id: 'orange',  name: 'Orange',  color: 'oklch(62.5% 0.22  38)'  },
   { id: 'amber',   name: 'Amber',   color: 'oklch(68%   0.19  75)'  },
@@ -50,7 +46,7 @@ const themes = [
       style="background-color: var(--color-brand-500)"
       aria-hidden="true"
     />
-    <!-- Chevron — inline, rotates on open -->
+    <!-- Chevron -->
     <svg
       class="theme-chevron h-3 w-3 flex-shrink-0 transition-transform duration-200"
       xmlns="http://www.w3.org/2000/svg"
@@ -141,7 +137,7 @@ const themes = [
       }
     });
 
-    // Also sync flat ThemeSelector swatches (mobile menu)
+    // Sync swatches
     const flatSwatches = document.querySelectorAll<HTMLButtonElement>('.theme-swatch');
     flatSwatches.forEach((btn) => {
       if (btn.dataset.themeId === id) {
@@ -202,7 +198,7 @@ const themes = [
       }
     });
 
-    // Close on outside click
+    // Outside close
     document.addEventListener('click', (e) => {
       const wrapper = trigger.closest('.theme-dropdown-wrapper');
       if (wrapper && !wrapper.contains(e.target as Node)) {

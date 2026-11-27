@@ -1,19 +1,7 @@
-/* =============================================================================
-   Astro Rocket Theme - Violet
-   =============================================================================
-   Rich violet (hue 277°). Creative, distinctive, and bold — inspired by
-   Tailwind's violet palette. The sweet spot between indigo and purple with
-   a premium, expressive character.
-
-   Dark mode: near-black with a rich violet tint and vivid glow.
-   Light mode: clean neutral whites with violet as the single accent.
-   ============================================================================= */
+/* Violet theme */
 
 html[data-theme="violet"] {
-  /* -------------------------------------------------------------------------
-     Brand Scale Override — Violet (hue 277)
-     Inspired by Tailwind violet-*. Rich and expressive.
-     ------------------------------------------------------------------------- */
+  /* Brand scale */
   --brand-50:  oklch(97.5% 0.02  277);
   --brand-100: oklch(94.5% 0.05  277);
   --brand-200: oklch(86%   0.12  277);
@@ -25,18 +13,16 @@ html[data-theme="violet"] {
   --brand-800: oklch(36.5% 0.14  277);
   --brand-900: oklch(26%   0.09  277);
 
-  /* -------------------------------------------------------------------------
-     Semantic Tokens - Light Mode
-     ------------------------------------------------------------------------- */
+  /* Light mode */
   --background: var(--gray-0);
   --background-secondary: oklch(97.5% 0.010 277);
   --background-tertiary: oklch(95% 0.018 277);
   --background-elevated: var(--gray-0);
 
-  --foreground: var(--gray-900);           /* 18.3:1 on white — WCAG AAA */
-  --foreground-secondary: var(--gray-700); /* 12.7:1 on white — WCAG AAA */
-  --foreground-muted: var(--gray-600);     /* 10.0:1 on white — WCAG AA  */
-  --foreground-subtle: var(--gray-500);    /*  5.5:1 on white — WCAG AA  */
+  --foreground: var(--gray-900);           /* WCAG AAA */
+  --foreground-secondary: var(--gray-700); /* WCAG AAA */
+  --foreground-muted: var(--gray-600);     /* WCAG AA */
+  --foreground-subtle: var(--gray-500);    /* WCAG AA */
 
   --border: var(--gray-200);
   --border-strong: var(--gray-300);
@@ -55,7 +41,7 @@ html[data-theme="violet"] {
   --accent-light: var(--brand-100);
 
   --muted: var(--gray-100);
-  --muted-foreground: var(--gray-500);     /*  5.5:1 on white — WCAG AA  */
+  --muted-foreground: var(--gray-500);     /* WCAG AA */
 
   --card: var(--gray-0);
   --card-border: var(--gray-200);
@@ -72,14 +58,12 @@ html[data-theme="violet"] {
   --gradient-start: oklch(96.5% 0 0);
   --gradient-end: oklch(100% 0 0);
 
-  /* Status colors - light mode backgrounds */
+  /* Status backgrounds */
   --success-light: oklch(94% 0.05 145);
   --warning-light: oklch(95% 0.05 85);
   --error-light:   oklch(94% 0.05 25);
 
-  /* -------------------------------------------------------------------------
-     Inverted/Contrast Section — deep violet-dark
-     ------------------------------------------------------------------------- */
+  /* Inverted section */
   --surface-invert: oklch(9.5% 0.018 277);
   --surface-invert-secondary: oklch(13.5% 0.014 277);
   --surface-invert-tertiary: oklch(17.5% 0.011 277);
@@ -89,9 +73,7 @@ html[data-theme="violet"] {
   --border-invert: oklch(21% 0.014 277);
   --border-invert-strong: oklch(29% 0.011 277);
 
-  /* -------------------------------------------------------------------------
-     Typography
-     ------------------------------------------------------------------------- */
+  /* Typography */
   --theme-font-sans: 'Manrope Variable', 'Manrope', ui-sans-serif, system-ui,
     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
     Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
@@ -104,9 +86,7 @@ html[data-theme="violet"] {
   --theme-heading-tracking: -0.02em;
   --theme-body-leading: 1.6;
 
-  /* -------------------------------------------------------------------------
-     Shadows — violet-tinted
-     ------------------------------------------------------------------------- */
+  /* Shadows — violet-tinted */
   --theme-shadow-sm: 0 1px 2px oklch(20% 0.03 277 / 0.08);
   --theme-shadow-md: 0 4px 8px oklch(20% 0.03 277 / 0.10),
     0 0 1px oklch(20% 0.03 277 / 0.05);
@@ -115,9 +95,7 @@ html[data-theme="violet"] {
   --theme-shadow-xl: 0 24px 48px oklch(20% 0.03 277 / 0.18),
     0 0 1px oklch(20% 0.03 277 / 0.05);
 
-  /* -------------------------------------------------------------------------
-     Border Radii
-     ------------------------------------------------------------------------- */
+  /* Border Radii */
   --theme-radius-sm: 0.25rem;    /* 4px  */
   --theme-radius-md: 0.375rem;   /* 6px  */
   --theme-radius-lg: 0.5rem;     /* 8px  */
@@ -125,9 +103,7 @@ html[data-theme="violet"] {
   --theme-radius-full: 9999px;
 }
 
-/* -------------------------------------------------------------------------
-   Dark Mode — deep near-black with violet glow
-   ------------------------------------------------------------------------- */
+/* Dark mode */
 html.dark[data-theme="violet"] {
   --background: oklch(9.5% 0.018 277);
   --background-secondary: oklch(15% 0.014 277);
@@ -137,7 +113,7 @@ html.dark[data-theme="violet"] {
   --foreground: oklch(95% 0.010 277);
   --foreground-secondary: oklch(83% 0.013 277);
   --foreground-muted: oklch(68% 0.010 277);
-  --foreground-subtle: oklch(58% 0.008 277);   /*  ~4.8:1 on bg — WCAG AA  */
+  --foreground-subtle: oklch(58% 0.008 277);   /* WCAG AA */
 
   --border: oklch(20% 0.014 277);
   --border-strong: oklch(27% 0.011 277);

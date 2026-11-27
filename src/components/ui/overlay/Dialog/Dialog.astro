@@ -1,8 +1,5 @@
 ---
-/**
- * Dialog Component
- * Accessible modal dialog with focus trap and keyboard navigation
- */
+/** Dialog component */
 import { cn } from '@/lib/cn';
 import Icon from '../../primitives/Icon/Icon.astro';
 
@@ -152,7 +149,7 @@ const sizes = {
           panel?.classList.remove('scale-95', 'opacity-0');
           panel?.classList.add('scale-100', 'opacity-100');
 
-          // Focus first focusable element
+          // Focus first
           const focusable = getFocusableElements();
           if (focusable.length > 0) {
             focusable[0].focus();
@@ -177,7 +174,7 @@ const sizes = {
         document.removeEventListener('keydown', trapFocus);
       }
 
-      // Expose methods on the element
+      // Expose methods
       (dialog as HTMLElement & { open?: () => void; close?: () => void }).open = open;
       (dialog as HTMLElement & { open?: () => void; close?: () => void }).close = close;
 
@@ -186,10 +183,10 @@ const sizes = {
         btn.addEventListener('click', close);
       });
 
-      // Backdrop click to close
+      // Backdrop close
       backdrop?.addEventListener('click', close);
 
-      // Escape key to close
+      // Escape close
       dialog.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           e.preventDefault();
@@ -199,7 +196,7 @@ const sizes = {
     });
   }
 
-  // Global function to open dialogs by ID
+  // Open by ID
   type DialogElement = HTMLElement & { open?: () => void; close?: () => void };
   (window as Window & { openDialog?: (id: string) => void }).openDialog = (id: string) => {
     const dialog = document.getElementById(id) as DialogElement | null;

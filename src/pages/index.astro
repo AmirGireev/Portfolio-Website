@@ -11,13 +11,6 @@ const projectItems = await getCollection('projects');
 const featuredProjects = projectItems
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 4);
-
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => {
-    if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
-    return b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf();
-  })
-  .slice(0, 3);
 ---
 
 <LandingLayout
@@ -35,8 +28,6 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
       <span class="text-foreground [-webkit-text-fill-color:currentColor]">Hi, I am Amir Gireev —</span><br />
       <span class="text-brand-500 [-webkit-text-fill-color:var(--color-brand-500)] dark:text-foreground dark:[-webkit-text-fill-color:currentColor]">Media</span><span class="text-foreground [-webkit-text-fill-color:currentColor]"> &amp; Computer Science Student</span>
     </h1>
-
-   
 
    <Fragment slot="actions">
       <Button size="lg" href="https://github.com/AmirGireev">
@@ -64,21 +55,6 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
       </div>
 
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3" data-reveal data-reveal-delay="1">
-        <!-- Game Development -->
-        <Card hover>
-          <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 flex items-center justify-center text-brand-500 shrink-0">
-              <Icon name="layout" size="sm" />
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="text-base font-semibold text-foreground">Game Development</h3>
-              <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
-                Developing games with 3D assets using Maya or Unity and Programming AIs that play games. 
-              </p>
-            </div>
-          </div>
-        </Card>
-
         <!-- Web Development -->
         <Card hover>
           <div class="flex items-start gap-4">
@@ -86,9 +62,9 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
               <Icon name="code" size="sm" />
             </div>
             <div class="flex-1 min-w-0">
-              <h3 class="text-base font-semibold text-foreground">Web Development</h3>
+              <h3 class="text-base font-semibold text-foreground">Full stack Web Development</h3>
               <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
-              Building websites with Python, Django, Html, CSS, Javascript, Streamlit and so on.
+              Building end-to-end web applications with Next.js, TypeScript, React, and Python.
               </p>
             </div>
           </div>
@@ -101,9 +77,24 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
               <Icon name="zap" size="sm" />
             </div>
             <div class="flex-1 min-w-0">
-              <h3 class="text-base font-semibold text-foreground">AI</h3>
+              <h3 class="text-base font-semibold text-foreground">AI Engineer</h3>
               <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
-                Using Rag, LLMs and Python to develop custom AI solutions from data assistants to game playing AI models 
+                Building AI assistants and search pipelines with Python, LLMs, and vector databases. 
+              </p>
+            </div>
+          </div>
+        </Card>
+
+        <!-- Game Development -->
+        <Card hover>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 flex items-center justify-center text-brand-500 shrink-0">
+              <Icon name="layout" size="sm" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-base font-semibold text-foreground">Game Development</h3>
+              <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
+                Developing 2D and 3D games in Unity and Unreal Engine, with a focus on gameplay systems. Combined with foundational skills in 3D modeling. 
               </p>
             </div>
           </div>
@@ -125,8 +116,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
           </div>
           <p class="text-lg text-foreground-muted leading-relaxed mb-4">
             I'm a media and computer science student and I come with my own funding via Erasmus+.
-            With 2 years of experience in game development/design, frontend/backend development and AI
-            I feel ready to take on new challenges and create amazing projects.
+            With 3 years of experience in full-stack development with TypeScript, Python, and PostgreSQL, alongside experience in automated testing, CI/CD, LLM/RAG pipelines and game development with Unity and Unreal Engine, I feel ready to take on new challenges and create amazing projects.
           </p>
            <Button variant="outline" href="/about" class="self-start">
             More about me

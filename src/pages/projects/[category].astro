@@ -9,14 +9,14 @@ import { getCollection } from 'astro:content';
 export async function getStaticPaths() {
   return [
     { params: { category: 'AI and Fullstack' }, props: { title: 'AI and Fullstack' } },
-    { params: { category: 'graphics-gamedev' }, props: { title: 'Graphics & Game Dev' } },
+    { params: { category: 'graphics-gamedev' }, props: { title: 'Game Development' } },
   ];
 }
 
 const { category } = Astro.params;
 const { title } = Astro.props;
 
-// Holt nur Projekte der ausgewählten Kategorie
+// Kategorie filtern
 const items = await getCollection('projects', ({ data }) => !data.draft && data.category === category);
 const projects = items.sort((a, b) => a.data.order - b.data.order);
 ---
