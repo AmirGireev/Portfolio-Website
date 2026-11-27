@@ -12,13 +12,11 @@ const categories = [
   {
     slug: 'AI and Fullstack',
     title: 'AI and Fullstack',
-    description: 'RAG systems, LLM tools, backend services, and API developments.',
     count: allProjects.filter((p) => p.data.category === 'AI and Fullstack').length,
   },
   {
     slug: 'graphics-gamedev',
-    title: 'Graphics & Game Dev',
-    description: '3D modeling, computer graphics, shaders, and raytracers.',
+    title: 'Game Development',
     count: allProjects.filter((p) => p.data.category === 'graphics-gamedev').length,
   },
 ];
@@ -45,8 +43,7 @@ const categories = [
                 </div>
                 <Icon name="arrow-up-right" size="sm" class="text-foreground-muted group-hover:text-brand-500 transition-colors" />
               </div>
-              <h2 class="font-display text-xl font-bold text-foreground mb-2">{cat.title}</h2>
-              <p class="text-sm text-foreground-muted leading-relaxed mb-6">{cat.description}</p>
+              <h2 class="font-display text-xl font-bold text-foreground mb-6">{cat.title}</h2>
             </div>
           </Card>
         ))}
